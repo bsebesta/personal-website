@@ -1,17 +1,51 @@
-<!doctype html>
-<html lang="{{ $.Site.Language.Lang }}">
-  {{ partial "head" . }}
-  <body class="sans-serif">
+<!DOCTYPE html>
+<html lang="en">
 
-    {{ block "header" . }}{{ partial "nav" . }}{{end}}
+<head>
 
-    {{ block "main" . }}{{ end }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{ block "footer" . }}{{ partial "footer" . }}{{end}}
+    <title>
+        {{ block "title" . }}
+        {{ .Site.Title }}{{ with .Page.Title }} – {{ $.Page.Title }}{{ end }}
+        {{ end }}
+    </title>
 
-    {{ $script := .Site.Data.webpack.main }}
-    {{ with $script.js }}
-      <script src="{{ relURL . }}"></script>
-    {{ end }}
-  </body>
+    <meta name="author" content="{{ $.Site.Params.Author }}">
+
+    <!-- Styles & Art Direction -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?1">
+
+    <!-- Feeds -->
+    <link rel="alternate" href="/notes/index.xml" type="application/rss+xml" title="Bryan Sebesta's Posts">
+    
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <nav id="banner">
+
+        <ul>
+    
+            <li><a class="menu-home{{ with .IsHome }} menu-active{{end}}" href="/" title="Home">Bryan Sebesta</a></li>
+            <li><a class="menu-home{{ if eq .Title "About" }} menu-active{{end}}" href="/about/" title="About">About</a></li>
+                    
+        </ul>
+
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+
+        {{ block "main" . }}
+        {{ end }}
+
+    </main>
+
+</body>
+
 </html>

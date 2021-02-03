@@ -1,0 +1,8 @@
+<section class="secondary-section">
+    <h2>Categories</h2>
+    {{ with .Site.Taxonomies.categories }}<ul class="tag-cloud">
+        {{ range $key, $value := . }}
+        <li><a href="/tags/{{ $key | urlize }}/">{{ $key }} <span>{{ .Count }}</span></a></li>
+        {{ end }}
+    </ul>{{ end }}
+</section>

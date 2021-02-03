@@ -1,9 +1,54 @@
-baseurl = "/"
+baseURL = "https://www.bryansebesta.blog/"
 languageCode = "en-us"
-languageLang = "en"
-title = "Homepage"
+title = "Bryan Sebesta's Blog"
+copyright = "© Copyright 2021 Bryan Sebesta"
 
-# RSS, categories and tags disabled for an easy start
-# See configuration options for more details: 
-# https://gohugo.io/getting-started/configuration/#toml-configuration
-disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
+sectionPagesMenu = "main"
+
+[permalinks]
+  notes = "/:year/:month/:day/:title/"
+  books = "/:title/"
+
+[params]
+  Author = "Bryan Sebesta"
+  Description = "A blog by the human named Bryan Sebesta"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.parser]
+      attribute = true
+      autoHeadingID = true
+      autoHeadingIDType = "github"
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = false
+      xhtml = false
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2

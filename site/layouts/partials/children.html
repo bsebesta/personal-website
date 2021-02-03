@@ -1,0 +1,5 @@
+<ul>
+    {{ range where .RegularPages ".IsSection" false }}
+    <li><a href="{{ .Permalink }}">{{ .File.Path }}</a></li>
+    {{ end }}
+</ul>

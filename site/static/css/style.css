@@ -1,0 +1,856 @@
+/** ============================================================
+    TOP LEVEL INHERITANCE
+    ============================================================ */
+
+/**
+ * Some notes!
+ *
+ * I'm formatting using a combination of Idiomatic CSS
+ * (https://github.com/necolas/idiomatic-css) and my own idiosyncratic
+ * determination to group things by property, especially when it comes
+ * to typography (which is what I'm trying to grasp and tinker with).
+ *
+ * I'm "stealing like an artist" (I hope) from several people's custom
+ * websites and CSS, trying to learn good CSS technique and design.
+ * Some of these people include:
+ *
+ *      - David Sleight (stuntbox.com)
+ *      – Ben Crowder (bencrowder.com)
+ *      - Robin Rendle (robinrendle.com)
+ *      - Mary Brown (aworkinglibrary.com)
+ *
+ */
+
+/** ============================================================
+    TOP LEVEL INHERITANCE
+    ============================================================ */
+
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        vertical-align: baseline;
+    }
+
+    main,
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+
+    *, :after, :before {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+
+    /** ============================================================
+        COLORS
+        ============================================================ */
+
+    /**
+     * Color notes
+     *
+     * At some point, I need to rename the colors variable names to be
+     * less specific. "Accent" is great, but "white" has to be reversed
+     * when I go into dark mode. It's probably fine, but I'd like the names
+     * to work well in either dark or light mode.
+     *
+     */
+
+     :root {
+        --color-bg: hsl(60,13%,95%);
+        --color-bg-banner: hsl(60,13%,92%);
+        --color-text: hsl(0, 0%, 13%);
+        --color-text-light: hsl(0, 0%, 33%);
+        --color-text-lighter: hsl(0, 0%, 73%);
+        --color-accent: hsl(0,80%,60%);
+        --color-accent-light: hsl(0,80%,65%);
+        --color-accent-lighter: hsl(0,80%,72%);
+        --color-accent-lightest: hsl(0,60%,92%);
+        --color-secondary-accent: hsl(60,13%,32%);
+        --color-secondary-accent-light: hsl(60,13%,65%);
+        --color-secondary-accent-lighter: hsl(60,13%,92%);
+    }
+
+    :root {
+        color: var(--color-text);
+    }
+
+    /** ============================================================
+        TYPOGRAPHY
+        ============================================================ */
+
+    /** Font Family & Weights
+        ============================================================ */
+
+    /**
+     * Font family notes
+     *
+     * I'm using Martin Majoor's "FF Scala" (https://www.martinmajoor.com/1_scala.html),
+     * which I discovered via Ellen Lupton's "Thinking with Type" book. It's elegant;
+     * it's humanistic, which matches my style (bookish and humanities-centered); it has
+     * a "sans" complement; and it comes highly recommended. I'm new to typography, so no
+     * doubt I'll find a style that suits me better in the future. But for now, Scala it is.
+     *
+     */
+
+     :root {
+        --font-family-serif: 'Merriweather', serif;
+        --font-family-sans: 'ff-scala-sans-pro', sans-serif;
+        --font-family-mono: 'Menlo','Monaco','Consolas','Andale Mono','lucida console','Courier New',monospace;
+        --font-weight-light: 300;
+        --font-weight-regular: 400;
+        --font-weight-bold: 700;
+
+        font-family: var(--font-family-serif);
+        font-weight: var(--font-weight-regular);
+        font-feature-settings: "kern", "liga", "clig", "calt", "onum", "pnum";
+    }
+
+    p,
+    ul,
+    ol {
+        font-family: var(--font-family-serif);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: var(--font-weight-regular);
+    }
+
+    em,i {
+        font-style: italic;
+    }
+
+    b {
+        font-weight: var(--font-weight-bold);
+    }
+
+    /** Font-size
+        ============================================================ */
+
+    /**
+     * Modular scale calculation
+     *
+     * I got this idea from David Sleight's personal website CSS (stuntbox.com).
+     * I set a modular scale, i.e. 1.125 (Major 2nd) or 1.5 (Perfect fifth) and
+     * the CSS ripples up and down.
+     *
+     * I set a base, equal to 1rem.
+     *
+     * I then have a scale that goes up and down from that base. For example,
+     * --scale-1 is "negative 1", a step DOWN from the base font size. But
+     * --scale1 is "positive 1," a step UP from the base font size.
+     *
+     * I have something similar going on with the line height. I have a base
+     * size, and I have steps up and down from there.
+     *
+     * I confess to not entirely understanding David Sleight's use cases and
+     * logic. But I'm leaving it here, so that I can tinker, and see what David
+     * was up to over time. I also plan to incoprorate ideas from Matej Latin's
+     * "Better Web Typography" and the recently discovered "The Elements of
+     * Typographic Style Applied to the Web."
+     *
+     * ALSO! A quick reference as I experiment with different scales:
+     *
+     * 1.067 – Minor Second
+     * 1.125 – Major Second
+     * 1.250 – Major Third
+     * 1.333 – Perfect Fourth
+     * 1.414 – Augmented Fourth
+     * 1.5 Perfect Fifth
+     * 1.618 – Golden Ratio
+     *
+     */
+
+    :root {
+
+        font-size: 20px;
+
+        --modular-scale: 1.250;
+
+        --scale-5: calc(var(--scale-4) / var(--modular-scale));
+        --scale-4: calc(var(--scale-3) / var(--modular-scale));
+        --scale-3: calc(var(--scale-2) / var(--modular-scale));
+        --scale-2: calc(var(--scale-1) / var(--modular-scale));
+        --scale-1: calc(var(--scale0) / var(--modular-scale));
+        --scale0: 1rem;
+        --scale1: calc(var(--scale0) * var(--modular-scale));
+        --scale2: calc(var(--scale1) * var(--modular-scale));
+        --scale3: calc(var(--scale2) * var(--modular-scale));
+        --scale4: calc(var(--scale3) * var(--modular-scale));
+        --scale5: calc(var(--scale4) * var(--modular-scale));
+        --scale6: calc(var(--scale5) * var(--modular-scale));
+        --scale7: calc(var(--scale6) * var(--modular-scale));
+        --scale8: calc(var(--scale7) * var(--modular-scale));
+        --scale9: calc(var(--scale8) * var(--modular-scale));
+        --scale10: calc(var(--scale9) * var(--modular-scale));
+        --scale11: calc(var(--scale10) * var(--modular-scale));
+        --scale12: calc(var(--scale11) * var(--modular-scale));
+        --scale13: calc(var(--scale12) * var(--modular-scale));
+        --scale14: calc(var(--scale13) * var(--modular-scale));
+        --scale15: calc(var(--scale14) * var(--modular-scale));
+    }
+
+    h1 { font-size: var(--scale4); }
+    h2 { font-size: var(--scale3); }
+    h3 { font-size: var(--scale2); }
+    h4 { font-size: var(--scale1); }
+
+    p,
+    li,
+    blockquote {
+        font-size: var(--scale0);
+    }
+
+    time {
+        font-size: var(--scale-1);
+    }
+
+    /** Line Measure & Side-padding
+        ============================================================ */
+
+    /**
+     * The measure is implemented, in most of my layouts, in the grid
+     * system. Look down there to see where it's implemented.
+     *
+     * The side-padding, something I noted in Ben Crowder's personal site
+     * CSS, is implemented in the layout as well.
+     *
+     * And as far as letter-spacing goes, I leave that at the default,
+     * which I understand to be 0em. For dark mode, because the letters
+     * appear farther apart on the darker background, I increase the letter
+     * spacing just a smidge. (I *should* decrease the font-weight as well,
+     * but I don't have access to anything in Scala that's less than 400.) I
+     * got some of these tips from the following website:
+     *
+     * https://rwt.io/typography-tips/readers-right-preferences-and-light-modes
+     *
+     *
+     */
+
+     :root {
+        --measure: 38rem;
+        --sidebar-measure: 15ch;
+        --letter-spacing-tightest: 0.03125em;
+        --letter-spacing-tight: 0.0625em;
+        --letter-spacing-loose: 0.125em;
+        --side-padding: 2ch;
+    }
+
+    p,
+    li,
+    blockquote {
+        letter-spacing: 0.0000em;
+    }
+
+    /**
+     * Note to self: David Sleight has several media queries that affect
+     * the font size. I need to look at these and see what the utility is
+     * in each case.
+     *
+     */
+
+     /** Line Height
+        ============================================================ */
+
+    :root {
+        --line-height-scale: 1.125;
+        --line-height-shortest: calc(var(--line-height-shorter) / var(--line-height-scale));
+        --line-height-shorter: calc(var(--line-height-base) / var(--line-height-scale));
+        --line-height-base: 1.4; /* Original 1.25 */
+        --line-height-taller: calc(var(--line-height-base) * var(--line-height-scale));
+        --line-height-tallest: calc(var(--line-height-taller) * var(--line-height-scale));
+
+        line-height: var(--line-height-base);
+    }
+
+    p + p {
+        margin-top: 1rem;
+    }
+
+    h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    main>article>header,
+    main>article>section {
+        margin-bottom: 1.5rem;
+    }
+
+    main > h1:first-of-type,
+    section > h1:first-of-type,
+    article > h1:first-of-type {
+        margin-top: 0;
+    }
+
+    h2 {
+        margin-top: 1.4rem;
+        margin-bottom: .3rem;
+    }
+
+        h1 + h2 {
+            margin-top: 0;
+        }
+
+    h3 {
+        margin-top: 1rem;
+        margin-bottom: .3rem;
+    }
+
+    p + ul,
+    p + ol,
+    p + blockquote,
+    p + pre,
+    p + time,
+    p + hr {
+        margin: 1rem 0;
+    }
+
+    ul,
+    ol {
+        line-height: var(--line-height-taller);
+        margin-bottom: 1rem;
+    }
+
+        /* This makes sure that nested lists don't appear as separate lists */
+        li>ul {
+            margin-bottom: 0;
+        }
+
+
+    /** ============================================================
+        KEY TYPOGRAPHIC ELEMENTS
+        ============================================================ */
+
+    /** Links
+        ============================================================ */
+
+    main a:link,
+    main a:visited {
+        color: var(--color-accent);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+        font-style: italic;
+    }
+
+    main a:hover,
+    main a:active {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+
+    /** Lists
+        ============================================================ */
+
+    /* This is the default list type within the "main" area */
+
+    main ul {
+        list-style-type: none;
+    }
+
+    main ul>li {
+        margin-left: .5rem;
+    }
+
+    main ul>li::before {
+        content: "\00BB";
+        margin-right: .5rem;
+        color: var(--color-accent);
+    }
+
+    /* Dated Page List */
+
+    ul.dated-page-list {
+        display: flex;
+        flex-flow: column nowrap;
+        list-style-type: none;
+        color: var(--color-text-light);
+    }
+
+    ul.dated-page-list li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.dated-page-list li::before {
+        content: "";
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.dated-page-list li>time {
+        display: inline-block;
+        width: 6ch;
+        text-align: right;
+        padding: 0;
+        margin-right: .5rem;
+        font-size: var(--scale-1);
+        font-family: var(--font-family-mono);
+        color: var(--color-text-lighter);
+    }
+
+    /* Tag Cloud */
+
+    ul.tag-cloud {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        list-style-type: none;
+    }
+
+    ul.tag-cloud li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.tag-cloud li::before {
+        content: "";
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.tag-cloud a {
+        display: inline-block;
+        background-color: var(--color-secondary-accent-lighter);
+        border-radius: .2rem;
+        padding: .2rem .2rem;
+        margin: .2rem .2rem;
+        font-family: var(--font-family-mono);
+        font-weight: var(--font-weight-regular);
+        font-size: var(--scale-2);
+        transition: background-color .5s ease,
+                    color .5s ease;
+    }
+
+    ul.tag-cloud a:link,
+    ul.tag-cloud a:visited {
+        color: var(--color-text);
+        text-decoration: none;
+    }
+
+    ul.tag-cloud a:hover,
+    ul.tag-cloud a:active {
+        background-color: var(--color-secondary-accent-light);
+        
+    }
+
+    /* Superscripted numbers */
+    ul.tag-cloud a>span {
+        display: inline-block;
+        font-size: var(--scale-2);
+        vertical-align: top;
+        font-family: var(--font-family-serif);
+    }
+
+    /* Multi-column List */
+    /* Currently handled inline on the Wiki page */
+
+    /* This is the list-style I when I'm pointing to related content, DEPRECATED */
+
+    ul.related-links {
+        list-style-type: none;
+    }
+
+    ul.related-links>li {
+        margin-left: .5rem;
+    }
+
+    ul.related-links>li::before {
+        content: "↬";
+        margin-right: .5rem;
+    }
+
+    ul.related-links a:link,
+    ul.related-links a:visited {
+        font-weight: var(--font-weight-bold);
+        font-style: italic;
+        text-decoration: underline;
+        color: var(--color-text);
+    }
+
+    /** Secondary Section
+        ============================================================ */
+
+        section.secondary-section>h2 {
+            font-size: var(--scale0);
+            border-bottom: solid 1px #eeeeee;
+        }
+
+    /** Blockquotes
+        ============================================================ */
+
+    blockquote {
+        padding-left: .5rem;
+        margin-left: 1rem;
+        border-left: solid 5px var(--color-accent);
+        font-style: italic;
+    }
+
+    /** Miscellanea
+        ============================================================ */
+
+    code {
+        background-color: var(--color-accent-lighter);
+        border-radius: 3px;
+        padding: .1rem;
+    }
+
+    pre code {
+        display: block;
+        background-color: var(--color-accent-lighter);
+        border-radius: 3px;
+        padding: 1rem;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    time {
+        color: var(--color-text-lighter);
+    }
+
+    article>footer>time {
+        display: inline-block;
+        width: 100%;
+        text-align: right;
+        color: var(--color-accent-light);
+        font-style: italic;
+    }
+
+    p {
+        hyphens: auto;
+    }
+
+    ::selection {
+        background-color: var(--color-accent-lighter);
+        color: var(--color-text) !important;
+    }
+
+    hr {
+        border: solid .5px var(--color-accent);
+        margin: 2rem 3rem;
+    }
+
+
+
+
+
+
+    /** ============================================================
+        LAYOUT
+        ============================================================ */
+
+    /** The Main Grid
+        ============================================================ */
+
+    body {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    /** Vertical Rhythm
+        ============================================================ */
+
+    #banner {
+        width: 100%;
+        padding: .5rem 0;
+        margin-bottom: 3rem;
+        background-color: var(--color-bg-banner);
+    }
+
+    main>article>footer {
+        margin-top: 2rem;
+    }
+
+    main {
+        margin-bottom: 12rem;
+    }
+
+    /** Horizontal Rhythm
+        ============================================================ */
+
+    #breadcrumb,
+    main,
+    body>aside,
+    body>footer {
+        width: min(100%,var(--measure));
+    }
+
+    main>*>header,
+    main>*>nav,
+    main>*>footer,
+    main>*>aside,
+    main>*>section,
+    body>aside,
+    #breadcrumb {
+        padding: 0 var(--side-padding);
+    }
+
+    /** Banner
+        ============================================================ */
+
+    #banner {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+    }
+
+    #banner a:link,
+    #banner a:visited {
+        color: var(--color-secondary-accent-light);
+        text-decoration: none;
+    }
+
+    #banner a:hover,
+    #banner a:active {
+        color: var(--color-accent);
+        text-decoration: none;
+    }
+
+    #banner a.menu-active {
+        font-weight: var(--font-weight-bold);
+    }
+
+    #banner a.menu-home {
+        font-variant: small-caps;
+    }
+
+    #banner>span {
+        display: block;
+        font-size: var(--scale1);
+        font-weight: var(--font-weight-bold);
+    }
+
+    #banner ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    #banner ul>li {
+        display: inline-block;
+        margin-right: 1rem;
+        font-size: var(--scale-1);
+    }
+
+    /** Breadcrumb
+        ============================================================ */
+
+    #breadcrumb ul {
+        display: flex;
+        flex-flow: row wrap;
+        list-style-type: none;
+    }
+
+    #breadcrumb li {
+        font-size: var(--scale-1);
+    }
+
+    #breadcrumb li::after {
+        content: ">";
+        color: var(--color-accent);
+        padding: 0 .5rem;
+    }
+
+    #breadcrumb li:last-of-type::after {
+        content: "";
+        padding: 0;
+    }
+
+    #breadcrumb a:link,
+    #breadcrumb a:visited {
+        color: var(--color-accent-light);
+        text-decoration: none;
+    }
+
+    #breadcrumb a:hover,
+    #breadcrumb a:active {
+        text-decoration: underline;
+    }
+
+    /** Header
+        ============================================================ */
+
+        main>article>header>span {
+            font-size: var(--scale-1);
+            color: var(--color-text-lighter);
+            margin: 0;
+        }
+
+        main>article>header>p {
+            font-size: var(--scale1);
+            color: var(--color-secondary-accent);
+            margin: 0;
+        }
+
+    /** Sidebar
+        ============================================================ */
+
+    aside#sidebar {
+        visibility: hidden;
+        display: none;
+    }
+
+    /** Below-page Asides
+        ============================================================ */
+
+    aside#related>section>h1 {
+        font-size: var(--scale2);
+    }
+
+    aside#related em {
+        font-style: italic;
+    }
+
+    /** Body Footer
+        ============================================================ */
+
+    body>footer {
+        text-align: center;
+        color: var(--color-accent-lighter);
+        position: relative;
+        bottom: 0;
+        padding: 1rem 0;
+    }
+
+    body>footer p {
+        font-size: var(--scale-1);
+    }
+
+    /** Index
+        ============================================================ */
+
+    .index-subsection {
+        background-color: var(--color-secondary-accent-lighter);
+        padding: 1rem var(--side-padding);
+        margin: 1rem 0;
+    }
+
+    .index-subsection>h2 {
+        margin-top: 0;
+    }
+
+    .index-relatedtags {
+        background-color: var(--color-secondary-accent-lighter);
+        padding: 1rem var(--side-padding);
+        margin-top: 1rem;
+    }
+
+    .index-relatedtags>h2 {
+        margin-top: 0;
+    }

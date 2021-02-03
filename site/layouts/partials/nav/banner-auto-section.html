@@ -1,0 +1,8 @@
+<ul>
+    
+            <li><a class="menu-home{{ with .IsHome }} menu-active{{end}}" href="/" title="Home">Bryan Sebesta</a></li>
+            {{ $currentPage := . }}
+            {{- range .Site.Menus.main -}}
+            <li><a class="{{if or ($currentPage.IsMenuCurrent " main" .) ($currentPage.HasMenuCurrent "main" .)}}menu-active{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a></li>
+            {{ end }}
+        </ul>

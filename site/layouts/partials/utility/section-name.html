@@ -1,0 +1,9 @@
+<!-- 
+    This gets the proper name of a section, and can be used
+    inside a range.
+-->
+
+{{- $section_heading := .Site.GetPage "section" .Section -}}
+    {{- with $section_heading -}}
+        {{- .Title -}}
+    {{end}}

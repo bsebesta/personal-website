@@ -1,0 +1,62 @@
+{{ define "main" }}
+
+    <header>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.subtitle }}<p>{{ $.Page.Params.subtitle }}</p>{{ end }}</p>
+    </header>
+        
+    {{ if eq .Title "Index" }}
+
+        <!-- Main Index Page -->
+        <section>
+
+            <p>This is not a tag cloud. This is a curated index of topics that are important to me, updated as often I find needful. Whereas my blog contains thought-out content, many of these pages contain quotes, clippings, and links--often without context or explanation. It's my file system, as it were.</p>
+
+            <ul>
+                {{ range where .Pages ".IsSection" true }}
+                <li>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    <ul>
+                        {{ range where .Pages ".IsSection" true }}
+                        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                        {{ end }}
+                    </ul>
+                </li>
+                {{ end }}
+            </ul>
+
+        </section>
+            
+    {{ else }}
+
+        <!-- Main Index description -->
+        <section>
+            {{ .Content }}
+        </section>
+        
+        <!-- Loop through sub-sections -->
+        {{ range where .Pages ".IsSection" true }}
+        <section class="index-subsection">
+            <h2>{{ .Title }}</h2>
+            {{ range .RegularPages }}
+                <h3>{{ if .Title }}{{ .Title }}{{ else }} {{ .File.BaseFileName }}.{{ .File.Ext }} {{ end }}</h3>
+                {{ .Content }}
+            {{ end }}
+        </section>
+        {{ end }}
+
+        <!-- Related Tags -->
+        {{ range .Params.related_tags }}
+        <section class="index-relatedtags">
+            <h2>Related posts to {{ . }}</h2>
+            <ul>
+                {{ range index $.Site.Taxonomies.tags . }}
+                <li>{{ partial "utility/section-name.html" . }}, <a href="{{ .Permalink }}">{{ .Date.Format "Jan 2" }} &mdash; {{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </section>
+        {{ end }}
+
+    {{ end }}
+
+{{ end }}

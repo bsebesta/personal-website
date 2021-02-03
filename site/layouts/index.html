@@ -1,13 +1,28 @@
 {{ define "main" }}
 
-{{ partial "jumbotron" (dict "imageUrl" .Params.image "title" .Title "subtitle" .Params.subtitle) }}
+<section>
 
-{{ partial "short-text" .Params.blurb}}
+    <section>
 
-{{ partial "2-up" .Params }}
+        {{ .Content }}
 
-{{ partial "text-and-image" (dict "heading" .Params.values.heading "text" .Params.values.text "buttonText" "Read more" "buttonLink" "/values") }}
+    </section>
 
-{{ partial "blog" . }}
+    <section>
+
+        {{ range $index, $value := (where .Site.Pages "Section" "notes").GroupByDate "2006" }}
+        <h2>{{ .Key }}</h2>
+        <ul class="dated-page-list">
+            {{ range .Pages }}
+                {{ if .IsSection }}{{ else }}
+                <li><time>{{ .Date.Format "Jan 2" }}</time> <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                {{end}}
+            {{ end }}
+        </ul>
+        {{ end }}
+
+    </section>
+
+</section>
 
 {{ end }}

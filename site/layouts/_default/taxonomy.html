@@ -10,8 +10,9 @@
     <section>
 
         <ul>
-            {{ range .RegularPages }}
-            <li><a href="{{ .Permalink }}">{{ .Date.Format "Jan 2" }} &mdash; {{ .Title }}</a></li>
+            {{ range .Data.Terms.Alphabetical }}
+            <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})
+                </a></li>
             {{ end }}
         </ul>
 

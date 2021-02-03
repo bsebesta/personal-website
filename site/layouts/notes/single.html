@@ -3,7 +3,9 @@
 <article>
 
     <header>
+        <!-- <span>{{ partial "utility/section-name.html" . }}</span> -->
         <h1>{{ .Title }}</h1>
+        <time>{{ .Date.Format "Jan 2 2006" }}</time>
     </header>
 
     <section>

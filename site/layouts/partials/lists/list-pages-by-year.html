@@ -1,0 +1,8 @@
+{{ range .RegularPages.GroupByDate "2006" }}
+        <h2>{{ .Key }}</h2>
+        <ul class="dated-page-list">
+            {{ range .Pages }}
+            <li><time>{{ .Date.Format "Jan 2" }}</time> <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{ end }}
+        </ul>
+{{ end }}

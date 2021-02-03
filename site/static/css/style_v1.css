@@ -1,0 +1,653 @@
+/** ============================================================
+    TOP LEVEL INHERITANCE
+    ============================================================ */
+
+/**
+ * Some notes!
+ *
+ * I'm formatting using a combination of Idiomatic CSS
+ * (https://github.com/necolas/idiomatic-css) and my own idiosyncratic
+ * determination to group things by property, especially when it comes
+ * to typography (which is what I'm trying to grasp and tinker with).
+ * 
+ * I'm "stealing like an artist" (I hope) from several people's custom
+ * websites and CSS, trying to learn good CSS technique and design.
+ * Some of these people include:
+ * 
+ *      - David Sleight (stuntbox.com)
+ *      – Ben Crowder (bencrowder.com)
+ *      - Robin Rendle (robinrendle.com)
+ *      - Mary Brown (aworkinglibrary.com)
+ *
+ */    
+
+/** ============================================================
+    TOP LEVEL INHERITANCE
+    ============================================================ */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+
+main,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+*, :after, :before {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+/** ============================================================
+    COLORS
+    ============================================================ */
+
+/**
+ * Color notes
+ *
+ * At some point, I need to rename the colors variable names to be
+ * less specific. "Accent" is great, but "white" has to be reversed
+ * when I go into dark mode. It's probably fine, but I'd like the names
+ * to work well in either dark or light mode.
+ * 
+ */
+
+:root {
+    /* Color Variables */
+    --color-accent: hsl(158, 90%, 30%);
+    --color-accent-dark: hsl(158, 90%, 25%);
+    --color-accent-light: hsl(158, 89%, 40%);
+    --color-grey: hsl(0, 0%, 96%);
+    --color-white: hsl(0, 0%, 99%);
+    --color-black: hsl(0, 0%, 15%);
+
+    color: var(--color-black);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-accent: hsl(158, 80%, 28%);
+        --color-accent-dark: hsl(158, 70%, 40%);
+        --color-grey: hsl(0, 0%, 10%);
+        --color-white: hsl(0, 0%, 3%);
+        --color-black: hsl(0, 0%, 80%);
+    }
+}
+
+/** ============================================================
+    TYPOGRAPHY
+    ============================================================ */
+
+/** Font Family & Weights
+    ============================================================ */
+
+/**
+ * Font family notes
+ *
+ * I'm using Martin Majoor's "FF Scala" (https://www.martinmajoor.com/1_scala.html),
+ * which I discovered via Ellen Lupton's "Thinking with Type" book. It's elegant;
+ * it's humanistic, which matches my style (bookish and humanities-centered); it has
+ * a "sans" complement; and it comes highly recommended. I'm new to typography, so no
+ * doubt I'll find a style that suits me better in the future. But for now, Scala it is. 
+ * 
+ */
+
+:root {
+    --font-family-sans: 'ff-scala-sans-pro', sans-serif;
+    --font-family-serif: 'ff-scala', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+
+    font-family: var(--font-family-serif);
+    font-weight: var(--font-weight-regular);
+    font-feature-settings: "kern", "liga", "clig", "calt", "onum", "pnum";
+}
+
+p,
+ul,
+ol {
+    font-family: var(--font-family-serif);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-bold);
+}
+
+em,i { 
+    font-style: italic;
+}
+
+b {
+    font-weight: var(--font-weight-bold);
+}
+
+/** Font-size
+    ============================================================ */
+
+/**
+ * Modular scale calculation
+ *
+ * I got this idea from David Sleight's personal website CSS (stuntbox.com).
+ * I set a modular scale, i.e. 1.125 (Major 2nd) or 1.5 (Perfect fifth) and
+ * the CSS ripples up and down. 
+ *
+ * I set a base, equal to 1rem.
+ *
+ * I then have a scale that goes up and down from that base. For example,
+ * --scale-1 is "negative 1", a step DOWN from the base font size. But
+ * --scale1 is "positive 1," a step UP from the base font size.
+ *
+ * I have something similar going on with the line height. I have a base
+ * size, and I have steps up and down from there. 
+ * 
+ * I confess to not entirely understanding David Sleight's use cases and 
+ * logic. But I'm leaving it here, so that I can tinker, and see what David
+ * was up to over time. I also plan to incoprorate ideas from Matej Latin's
+ * "Better Web Typography" and the recently discovered "The Elements of
+ * Typographic Style Applied to the Web."
+ * 
+ * ALSO! A quick reference as I experiment with different scales:
+ * 
+ * 1.067 – Minor Second
+ * 1.125 – Major Second
+ * 1.250 – Major Third
+ * 1.333 – Perfect Fourth
+ * 1.414 – Augmented Fourth
+ * 1.5 Perfect Fifth
+ * 1.618 – Golden Ratio
+ * 
+ */
+
+:root {
+    --modular-scale: 1.125; /* Perfect fourth works nicely */
+
+    --scale-5: calc(var(--scale-4) / var(--modular-scale));
+    --scale-4: calc(var(--scale-3) / var(--modular-scale));
+    --scale-3: calc(var(--scale-2) / var(--modular-scale));
+    --scale-2: calc(var(--scale-1) / var(--modular-scale));
+    --scale-1: calc(var(--scale0) / var(--modular-scale));
+    --scale0: 1rem;
+    --scale1: calc(var(--scale0) * var(--modular-scale));
+    --scale2: calc(var(--scale1) * var(--modular-scale));
+    --scale3: calc(var(--scale2) * var(--modular-scale));
+    --scale4: calc(var(--scale3) * var(--modular-scale));
+    --scale5: calc(var(--scale4) * var(--modular-scale));
+    --scale6: calc(var(--scale5) * var(--modular-scale));
+    --scale7: calc(var(--scale6) * var(--modular-scale));
+    --scale8: calc(var(--scale7) * var(--modular-scale));
+    --scale9: calc(var(--scale8) * var(--modular-scale));
+    --scale10: calc(var(--scale9) * var(--modular-scale));
+    --scale11: calc(var(--scale10) * var(--modular-scale));
+    --scale12: calc(var(--scale11) * var(--modular-scale));
+    --scale13: calc(var(--scale12) * var(--modular-scale));
+    --scale14: calc(var(--scale13) * var(--modular-scale));
+    --scale15: calc(var(--scale14) * var(--modular-scale));
+
+    /* 16pt * 1.25 = 20pt */
+    font-size: 125%;
+}
+
+h1 { font-size: var(--scale4); }
+h2 { font-size: var(--scale3); }
+h3 { font-size: var(--scale2); }
+h4 { font-size: var(--scale1); }
+
+p,
+li,
+blockquote {
+    font-size: var(--scale0);
+}
+
+/**
+ * Note to self: David Sleight has several media queries that affect
+ * the font size. I need to look at these and see what the utility is
+ * in each case. 
+ * 
+ */
+
+ /** Line Height
+    ============================================================ */
+
+:root {
+    --line-height-scale: 1.125;
+    --line-height-shortest: calc(var(--line-height-shorter) / var(--line-height-scale));
+    --line-height-shorter: calc(var(--line-height-base) / var(--line-height-scale));
+    --line-height-base: 1.25;
+    --line-height-taller: calc(var(--line-height-base) * var(--line-height-scale));
+    --line-height-tallest: calc(var(--line-height-taller) * var(--line-height-scale));
+
+    line-height: var(--line-height-base);
+}
+
+p + p {
+    margin-top: 1rem;
+}
+
+h1 {
+    margin-top: 2rem;
+    margin-bottom: .3rem;
+}
+
+main > h1:first-of-type,
+section > h1:first-of-type,
+article > h1:first-of-type {
+    margin-top: 0;
+}
+
+h2 {
+    margin-top: 1.4rem;
+    margin-bottom: .3rem;
+}
+
+h3 {
+    margin-top: 1rem;
+    margin-bottom: .3rem;
+}
+
+p + ul,
+p + ol,
+p + blockquote,
+p + pre,
+p + hr {
+    margin: 1rem 0;
+}
+
+ul,
+ol {
+    line-height: var(--line-height-taller);
+    margin-bottom: 1rem;
+}
+
+/** Line Measure & Side-padding
+    ============================================================ */
+
+/**
+ * The measure is implemented, in most of my layouts, in the grid
+ * system. Look down there to see where it's implemented.
+ * 
+ * The side-padding, something I noted in Ben Crowder's personal site
+ * CSS, is implemented in the layout as well.
+ * 
+ * And as far as letter-spacing goes, I leave that at the default,
+ * which I understand to be 0em. For dark mode, because the letters
+ * appear farther apart on the darker background, I increase the letter
+ * spacing just a smidge. (I *should* decrease the font-weight as well,
+ * but I don't have access to anything in Scala that's less than 400.) I
+ * got some of these tips from the following website:
+ * 
+ * https://rwt.io/typography-tips/readers-right-preferences-and-light-modes
+ * 
+ * 
+ */
+
+:root {
+    --measure: 50ch;
+    --letter-spacing-tightest: 0.03125em;
+    --letter-spacing-tight: 0.0625em;
+    --letter-spacing-loose: 0.125em;
+    --side-padding: 2ch;
+}
+
+p,
+li,
+blockquote, {
+    letter-spacing: 0.0000em;
+}
+
+@media (prefers-color-scheme: dark) {
+    p,
+    li,
+    blockquote {
+        letter-spacing: 0.0015em;
+    }
+}
+
+/** ============================================================
+    KEY TYPOGRAPHIC ELEMENTS
+    ============================================================ */
+
+/** Links
+    ============================================================ */
+
+a:link,
+a:visited {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-skip-ink: auto;
+    font-weight: 700;
+}
+
+a:hover,
+a:active {
+    color: var(--color-accent-dark);
+    text-decoration-color: var(--color-accent-dark);
+}
+
+/** Lists
+    ============================================================ */
+
+ul,
+ol {
+    padding-left: 1.25rem; 
+}
+
+ul li {
+    padding-left: 1.1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+ul li::before {
+    content: "»";
+    color: var(--color-accent);
+    /* content: "•"; */
+    position: absolute;
+    left: 0.2rem;
+    top: -0.05rem;
+}
+
+ol {
+    list-style-type: none;
+    list-style-position: inside;
+    counter-reset: li;
+}
+
+ol li {
+    padding-left: 1.1rem;
+    counter-increment: li;
+}
+
+ol li::before {
+    display: inline-block;
+    color: var(--color-accent);
+    width: 1em;
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+    text-align: right;
+    direction: rtl;
+    content: counter(li);
+}
+
+/** Blockquotes
+    ============================================================ */
+
+blockquote {
+    padding-left: .5rem;
+    margin-left: 1rem;
+    border-left: solid 5px var(--color-accent-dark);
+    font-style: italic;
+}
+
+/** Miscellanea
+    ============================================================ */
+
+code {
+    background-color: var(--color-white);
+    border-radius: 3px;
+    padding: .1rem;
+}
+
+pre code {
+    display: block;
+    background-color: var(--color-white);
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+em {
+
+}
+
+time {
+
+}
+
+p {
+    hyphens: auto;
+}
+
+::selection {
+	background: var(--color-accent);
+	color: var(--color-white);
+}
+
+hr {
+    border: solid .5px var(--color-accent);
+    margin: 0 3rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    ::selection {
+        color: var(--color-black);
+    }
+}
+
+/** ============================================================
+    LAYOUTS
+    ============================================================ */
+
+/**
+ * The measure is implemented, in most of my layouts, in the grid
+ * system. Look down there to see where it's implemented.
+ * 
+ * The side-padding, something I noted in Ben Crowder's personal site
+ * CSS, is implemented in the layout as well.
+ * 
+ * Example HTML:
+ *
+ * <body id="default-layout">
+ *   <header></header>
+ *   <main></main>
+ *   <div id="banner-bg"></div>
+ * </body>
+ *
+ */
+
+#default-layout {
+    display: grid;
+    grid-template-columns: auto minmax(auto,var(--measure)) auto;
+    grid-template-areas:
+        'nav nav nav'
+        '. main .';
+    background-color: var(--color-grey)
+}
+
+#default-layout > header {
+    grid-area: nav;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem var(--side-padding) 1rem var(--side-padding);
+}
+
+#default-layout > header > h1 {
+    margin: 0;
+    display: inline-block;
+    font-size: var(--scale1);
+}
+
+#default-layout > header a {
+    text-decoration: none;
+    font-weight: 400;
+    color: var(--color-white);
+}
+
+@media (prefers-color-scheme: dark) {
+    #default-layout > header a {
+        color: var(--color-black);
+    }
+}
+
+#default-layout > header > nav > a:link,
+#default-layout > header > nav > a:visited {
+    display: inline-block;
+    padding: .1rem .3rem;
+    background-color: var(--color-accent);
+    transition: background-color .3s;
+    border-radius: 5px;
+}
+
+#default-layout > header > nav > a:hover,
+#default-layout > header > nav > a:active {
+    background-color: var(--color-accent-dark);
+}
+
+#default-layout > header > nav > a:first-of-type {
+    margin-left: -.3rem;
+}
+
+#banner-bg {
+    grid-area: nav;
+    z-index: -1;
+    background-color: var(--color-accent);
+}
+
+main {
+    grid-area: main;
+    padding: 4rem var(--side-padding) 10rem var(--side-padding);
+}
+
+/** ============================================================
+    POSTS
+    ============================================================ */
+
+.breadcrumbs ol,
+.breadcrumbs ul {
+    padding: 0;
+    list-style-type: none;
+    list-style-position: inside;
+}
+
+.breadcrumbs li {
+    display: inline;
+    padding-left: 1rem;
+}
+
+.breadcrumbs ul li::before {
+    content: " / ";
+    color: var(--color-accent);
+    /* content: "•"; */
+}
+
+.breadcrumbs li:first-of-type {
+    padding-left: 0;
+}
+
+.breadcrumbs li:first-of-type::before {
+    content: "";
+    color: var(--color-accent);
+    /* content: "•"; */
+}

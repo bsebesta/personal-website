@@ -1,0 +1,5 @@
+<ul>
+    {{ range where .Site.RegularPages "Section" "books" | first 3 }}
+    <li>{{ partial "utility/section-name.html" . }}, <a href="{{ .Permalink }}">{{ .Date.Format "Jan 2" }} &mdash; {{ .Title }}</a></li>
+    {{ end }}
+</ul>
