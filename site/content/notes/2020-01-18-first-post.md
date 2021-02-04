@@ -10,4 +10,4 @@ But in the end, I realized that I was letting the platonic ideal of a website pa
 
 Finally, I remembered: all I need is a home page, and a blog page. A single typeface and simple colors. The rest? It can all come later, and it will come later. I just needed to start.
 
-Walter Smith: "Writing is very easy. All you do is sit in front of a typewriter keyboard until little drops of blood appear on your forehead." He could have said designing and coding. Art is hard. It's a Goliath, and sometimes the only stone in our sling is to settle for something less than what we'd hoped for.
+Walter Smith: "Writing is very easy. All you do is sit in front of a typewriter keyboard until little drops of blood appear on your forehead." He could just as easily have said that about designing, coding, or anything creative. Art, it turns out, is hard. It's a Goliath, and sometimes the only stone in our sling is to settle for something less than what we'd hoped for.
