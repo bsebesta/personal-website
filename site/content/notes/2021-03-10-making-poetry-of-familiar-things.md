@@ -1,6 +1,8 @@
 ---
 title: "Making Poetry of Familiar Things"
-date: 2021-03-10
+date: "2021-03-10"
+tags:
+- creativity
 ---
 
 > My aim is to take familiar things and make
@@ -15,4 +17,4 @@ date: 2021-03-10
 > 
 > Horace, Epistles, ii.3
 
-When I wonder how to best describe the creative act, the act of designing–whether it be an interface, a blog post, sketchnotes, art, or even a life–I find this description fits the bill pretty well.
+When I wonder how to best describe the creative act, the act of designing—whether it be an interface, a blog post, sketchnotes, art, or even a life—I find this description fits the bill pretty well.
