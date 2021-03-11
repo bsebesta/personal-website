@@ -592,6 +592,7 @@
     blockquote {
         padding-left: .5rem;
         margin-left: 1rem;
+        margin-bottom: 1rem;
         border-left: solid 5px var(--color-accent);
         font-style: italic;
     }
